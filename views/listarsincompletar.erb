@@ -13,25 +13,16 @@
 				<div class="btn-group btn-group-justified" role="group" aria-label="...">
   					<a href="/nuevatarea" class="btn btn-info" role="button">Crear Tareas</a>
   					<a href="#" class="btn btn-info" role="button">Completar Tareas</a>
-  					<a href="#" class="btn btn-info" role="button">Borrar Tareas</a>
-  					<a href="#" class="btn btn-info" role="button">Listar Tareas Sin Completar</a>
+  					<a href="/eliminartarea" class="btn btn-info" role="button">Borrar Tareas</a>
+  					<a href="/listarsincompletar" class="btn btn-info" role="button">Listar Tareas Sin Completar</a>
   					<a href="/listarcompletadas" class="btn btn-info" role="button">Listar Tareas Completadas</a>
 				</div>
 			</div>
 		</div>
 		<div class="col-md-12" align="center">
-		  <h1>Listado de Tareas Completadas</h1>
-      <p>
-        <%= ho %>
-        ------------------
-        <%= Date.parse(ho[0]["created_at"]).to_time.strftime("%d-%m-%Y") %>
-        <%= Time.parse(ho[0]["created_at"]).to_time.strftime("%H:%M:%S") %>
-        
-      </p>
-    <div class="col-md-10 col-md-offset-1" align="center">
-    <div class="panel panel-default">
-      <!-- Default panel contents -->
-      
+		  <h1>Listado de Tareas sin completar</h1>
+      <div class="col-md-10 col-md-offset-1" align="center">
+      <div class="panel panel-default">      
         <table class="table table-bordered table-striped">
           <tr>
             <th style="text-align:center">#</th>
@@ -40,6 +31,7 @@
             <th style="text-align:center">Fecha-Hora Actualización</th>
           </tr>
           <% for i in (0..ho.size-1) %>
+            <% if ho[i]["done"] == false %>
               <tr>
                 <td style="text-align:center"> <%= ho[i]["id"] %> </td>
                 <td style="text-align:center"> <%= ho[i]["title"] %> </td>
@@ -53,13 +45,11 @@
                     <%= Time.parse(ho[i]["updated_at"]).to_time.strftime("%H:%M:%S") %>
                 </td>
               </tr> 
+            <% end %>
           <% end %>
-
-        </table>
-        
+        </table>        
 		</div>
     </div>
 	</div>
-
     </body>
 </html>
