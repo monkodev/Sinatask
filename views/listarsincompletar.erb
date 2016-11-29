@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> SINATASK! </title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    </head>
+    <body>
+    <div class="row">
+    <%= image_tag("/tatry1.jpg", :alt => "Błyszcz, 2159 m") %>
+		<div class="col-md-12"><img src="./views/cabezal.jpg" alt="Logo Sinatask!"></div>
+		<div class="col-md-12">
+        	<div class="container-fluid">
+				<div class="btn-group btn-group-justified" role="group" aria-label="...">
+  					<a href="/nuevatarea" class="btn btn-info" role="button">Crear Tareas</a>
+  					<a href="#" class="btn btn-info" role="button">Completar Tareas</a>
+  					<a href="#" class="btn btn-info" role="button">Borrar Tareas</a>
+  					<a href="#" class="btn btn-info" role="button">Listar Tareas Sin Completar</a>
+  					<a href="/listarcompletadas" class="btn btn-info" role="button">Listar Tareas Completadas</a>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-12" align="center">
+		  <h1>Listado de Tareas Completadas</h1>
+      <p>
+        <%= ho %>
+        ------------------
+        <%= Date.parse(ho[0]["created_at"]).to_time.strftime("%d-%m-%Y") %>
+        <%= Time.parse(ho[0]["created_at"]).to_time.strftime("%H:%M:%S") %>
+        
+      </p>
+    <div class="col-md-10 col-md-offset-1" align="center">
+    <div class="panel panel-default">
+      <!-- Default panel contents -->
+      
+        <table class="table table-bordered table-striped">
+          <tr>
+            <th style="text-align:center">#</th>
+            <th style="text-align:center">Tarea</th>
+            <th style="text-align:center">Fecha-Hora Creación</th>
+            <th style="text-align:center">Fecha-Hora Actualización</th>
+          </tr>
+          <% for i in (0..ho.size-1) %>
+              <tr>
+                <td style="text-align:center"> <%= ho[i]["id"] %> </td>
+                <td style="text-align:center"> <%= ho[i]["title"] %> </td>
+
+                <td style="text-align:center">
+                    <%= Date.parse(ho[i]["created_at"]).to_time.strftime("%d-%m-%Y") %>
+                    <%= Time.parse(ho[i]["created_at"]).to_time.strftime("%H:%M:%S") %>
+                </td>
+                <td style="text-align:center"> 
+                    <%= Date.parse(ho[i]["updated_at"]).to_time.strftime("%d-%m-%Y") %>
+                    <%= Time.parse(ho[i]["updated_at"]).to_time.strftime("%H:%M:%S") %>
+                </td>
+              </tr> 
+          <% end %>
+
+        </table>
+        
+		</div>
+    </div>
+	</div>
+
+    </body>
+</html>
