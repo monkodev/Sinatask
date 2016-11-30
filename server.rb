@@ -1,6 +1,5 @@
 require 'sinatra'
 require 'make_todo'
-require 'sinatra/static_assets'
 
 get '/' do
 	erb :index1
@@ -12,9 +11,10 @@ get '/nuevatarea' do
 end
 
 get '/nuevatask' do
-	parm=params[:newtask].to_s.gsub(" ","_")
-	puts parm
-	if parm != "_" || parm != nil || parm != ""
+	par=params[:newtask]
+	if par.length > 0
+		parm=params[:newtask].to_s.gsub(" ","_")
+		#puts "PARAMETERRRRSSS:" "#{parm}" "#{parm.length.to_i}"	
 		Tarea.create(parm)
 		msg="Tarea ingresada correctamente!!!"
 	else
