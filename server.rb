@@ -7,12 +7,20 @@ get '/' do
 end
 
 get '/nuevatarea' do
-	erb :nuevatarea
+	msg=""
+	erb :nuevatarea, :locals => {:msgx => msg}
 end
 
 get '/nuevatask' do
-	Tarea.create(params[:newtask])
-	redirect ('/')
+	parm=params[:newtask].to_s.gsub(" ","_")
+	puts parm
+	if parm != "_" || parm != nil || parm != ""
+		Tarea.create(parm)
+		msg="Tarea ingresada correctamente!!!"
+	else
+		msg="No es posible ingresar esa tarea"
+	end
+	erb :nuevatarea, :locals => {:msgx => msg}	
 end
 
 get '/listarcompletadas' do
@@ -31,8 +39,8 @@ get '/eliminartarea' do
 end
 
 get '/deletetask' do
-	if Tarea.find(params[:deletask].to_i)==true
-		Tarea.destroy(params[:deletask])
+	if Tarea.find(params[:deletask].to_i)!={"status"=>"404","error"=>"Not Found"}
+		Tarea.destroy(params[:deletask].to_i)
 		msg="Tarea eliminada correctamente"
 	else
 		msg="No existe la tarea ingresada"
