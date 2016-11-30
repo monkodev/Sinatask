@@ -47,3 +47,18 @@ get '/deletetask' do
 	end
 	erb :eliminartarea, :locals => {:msgx => msg}	
 end
+
+get '/actualizatarea' do
+	msg=""
+	erb :actualizatarea, :locals => {:msgx => msg}
+end
+
+get '/acttask' do
+	if Tarea.find(params[:acttask].to_i)!={"status"=>"404","error"=>"Not Found"}
+		Tarea.update(params[:acttask].to_i)
+		msg="Tarea actualizada correctamente"
+	else
+		msg="No existe la tarea ingresada o no se puede actualizar"
+	end
+	erb :actualizatarea, :locals => {:msgx => msg}	
+end

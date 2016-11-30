@@ -20,16 +20,14 @@
 			</div>
 		</div>
 		<div class="col-md-12" align="center">
-		<h1>Crear nueva tarea</h1>
-			<form action="/nuevatask" method="get">
- 				<p align="center">Ingrese el nombre de la nueva tarea</p>
-				<input type="text" name="newtask" align="center">
-  				<input type="submit" value="Crear!" align="center">
-  				<p align="center" style="color:red; border:bold;"><%= msgx %></p>
+		<h1>Completar una tarea</h1>
+			<form action="/acttask" method="get">
+ 				<p align="center">Ingrese el número (ID) de la tarea a marcar como completa</p>
+				<input type="text" name="acttask" align="center">
+  				<input type="submit" value="Actualizar!" align="center">
+          <p align="center" style="color:red; border:bold;"><%= msgx %></p>
 			</form>
 		</div>
 	</div>
-
-
     </body>
 </html>
